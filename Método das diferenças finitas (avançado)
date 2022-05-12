@@ -3,37 +3,32 @@ import matplotlib.pyplot as plt
 a=0
 b=2
 def n(n):
-        n
-n(10)
-n(100)
-n(1000)
-matrizB=np.zeros(n())
-matrizB[0]=1
-matrizB[-1]=2.72
-y=matrizB
-h=(b-a)/(n)
-x=np.linspace(a,b,num=n)
-matrizA=np.zeros((n,n))
-matrizA[0,0]=1
-matrizA[-1,-1]=1
-
-def MatrixA(n):
-    for i in range(1,n-1):
-        matrizA[i, i + 1] = 1
-        matrizA[i, i - 1] = -1
-
-def MatrixB(n):
-    for k in (1,n-1):
-        matrizB[k] = 2 * h * y[k] * (x[k] ** 3 - 1.5)
-
-def DefiningY():
-    for i in range(1,15):
-        MatrixB()
-        y = np.linalg.solve(matrizA, matrizB) #Multiplica a matriz B pela inversa da matriz A
-    # Solução analítica
+    matrizB=np.zeros(n)
+    matrizB[0]=1
+    matrizB[-1]=2.72
+    y=matrizB
+    h=(b-a)/(n)
+    x=np.linspace(a,b,num=n)
+    matrizA=np.zeros((n,n))
+    matrizA[0,0]=1
+    matrizA[-1,-1]=1
+    def MatrixA(n):
+        for i in range(1,n-1):
+            matrizA[i, i + 1] = 1
+            matrizA[i, i - 1] = -1
+    MatrixA(n)
+    def MatrixB(n):
+        for k in (1,n-1):
+            matrizB[k] = 2 * h * y[k] * (x[k] ** 3 - 1.5)
+    def DefiningY():
+        for i in range(1,15):
+            MatrixB(n)
+        y=np.linalg.solve(matrizA, matrizB) #Multiplica a matriz B pela inversa da matriz A
+    DefiningY()
+        # Solução analítica
     xsoluçãoanalitica = np.linspace(0, 2, 1000)
     ysoluçãoanalitica = np.exp(xsoluçãoanalitica ** 4 / 4 - 1.5 * xsoluçãoanalitica)
-    # Plotagem do gráfico
+        # Plotagem do gráfico
     if n==10:
         plt.plot(x, y, "r", label="Método das diferenças finitas com 10 pontos")
         plt.plot(xsoluçãoanalitica,ysoluçãoanalitica,"b",label="Solução analítica")
@@ -48,5 +43,6 @@ def DefiningY():
     plt.ylabel("Eixo y")
     plt.legend(loc="upper center")
     plt.show()
-    
-    
+n(10)
+n(100)
+n(1000)
